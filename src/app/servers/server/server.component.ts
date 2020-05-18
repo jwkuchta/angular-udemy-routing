@@ -20,7 +20,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-server',
@@ -34,7 +34,8 @@ export class ServerComponent implements OnInit {
 
   constructor(
     private serversService: ServersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -43,6 +44,16 @@ export class ServerComponent implements OnInit {
     this.server = this.serversService.getServer(id)
     this.route.params.subscribe((params: Params) => {
       this.server = this.serversService.getServer(+params['id'])
+    })
+  }
+
+  onEdit() {
+    // debugger
+    this.router.navigate(['edit'], {
+      relativeTo: this.route, 
+      // this will overwrite the default dehavior which is to drop them
+      // if we were adding new params 'merge' would be the correct option
+      queryParamsHandling: 'preserve'
     })
   }
 
