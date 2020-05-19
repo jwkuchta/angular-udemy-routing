@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { relative } from 'path';
 import { CanComponentDeactivate } from './can-deactivate-guard.service';
 import { Observable } from 'rxjs';
 

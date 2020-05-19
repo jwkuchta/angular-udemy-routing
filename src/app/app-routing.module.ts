@@ -10,6 +10,8 @@ import { ServerComponent } from './servers/server/server.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './auth-guard.service'
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
+import { ErrorPageComponentComponent } from './error-page-component/error-page-component.component';
+import { ServerResolver } from './servers/server/server-resolver.service';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -21,14 +23,15 @@ const appRoutes: Routes = [
         canActivateChild: [ AuthGuard ], 
         component: ServersComponent, 
         children: [
-      { path: ':id', component: ServerComponent},
+      { path: ':id', component: ServerComponent, resolve: {server: ServerResolver}},
       { 
         path: ':id/edit',
         canDeactivate: [CanDeactivateGuard],
         component: EditServerComponent
       }
     ]},
-    { path: 'not-found', component: PageNotFoundComponent},
+    // { path: 'not-found', component: PageNotFoundComponent},
+    { path: 'not-found', component: ErrorPageComponentComponent, data: {message: 'Are you lost? There is nothing here'}},
     // this wildcard route needs to be at the bottom of our list of routes
     { path: '**', redirectTo: '/not-found', pathMatch: 'full'}
   ]
