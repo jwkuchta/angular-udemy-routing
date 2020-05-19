@@ -39,7 +39,9 @@ const appRoutes: Routes = [
 @NgModule({
     // no need to re-declare them here cause we have already done so in the app.module.ts
     imports: [
-        RouterModule.forRoot(appRoutes)
+        // RouterModule.forRoot(appRoutes, {useHash: true}) 
+        // useHash tells the server to only case about the part after the hashtag
+        RouterModule.forRoot(appRoutes) 
     ],
     // to add this module to the imports of another module what should be accessible to 
     // the module that imports this module. We then import it in app.module.ts
